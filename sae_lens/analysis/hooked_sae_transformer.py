@@ -4,10 +4,15 @@ from typing import Any, Callable, Dict, List, Optional, Tuple, Union
 
 import torch
 from jaxtyping import Float
+import sys
+local_path = "/works/data0/yama11235/TransformerLens"
+sys.path.insert(0, local_path)
 from transformer_lens.ActivationCache import ActivationCache
 from transformer_lens.hook_points import HookPoint  # Hooking utilities
 from transformer_lens.HookedTransformer import HookedTransformer
 
+import sys
+local_path = "/works/data0/yama11235/SAELens"
 from sae_lens.sae import SAE
 
 SingleLoss = Float[torch.Tensor, ""]  # Type alias for a single element tensor

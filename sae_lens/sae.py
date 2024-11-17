@@ -14,6 +14,9 @@ import torch
 from jaxtyping import Float
 from safetensors.torch import save_file
 from torch import nn
+import sys
+local_path = "/works/data0/yama11235/TransformerLens"
+sys.path.insert(0, local_path)
 from transformer_lens.hook_points import HookedRootModule, HookPoint
 
 from sae_lens.config import DTYPE_MAP
@@ -129,7 +132,7 @@ class SAE(HookedRootModule):
         use_error_term: bool = False,
     ):
         super().__init__()
-
+        print("custom sae")
         self.cfg = cfg
 
         if cfg.model_from_pretrained_kwargs:
@@ -522,7 +525,7 @@ class SAE(HookedRootModule):
         x = self.reshape_fn_in(x)  # type: ignore
 
         # handle run time activation normalization if needed
-        x = self.run_time_activation_norm_fn_in(x)
+        x = self.run_time_activation_norm_fn_in(x).to(self.device)
 
         # apply b_dec_to_input if using that method.
         sae_in = self.hook_sae_input(x - (self.b_dec * self.cfg.apply_b_dec_to_input))
